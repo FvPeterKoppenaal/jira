@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref} from 'vue'
 import type {Issue} from "@/types/Issue.ts";
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
       issue: Issue
       depth?: number
@@ -36,7 +36,9 @@ const expanded = ref(true)
       />
 
       <strong class="key">
-        {{ issue.key }}
+        <a :href="`https://flikweertvision.atlassian.net/browse/${issue.key}`" target="_blank">
+          {{ issue.key }}
+        </a>
       </strong>
 
       <span class="summary">
@@ -55,13 +57,13 @@ const expanded = ref(true)
         {{ issue?.assignee?.displayName ?? 'Unassigned' }}
       </span>
       <span>
-        {{ issue.timetracking.originalEstimateSeconds ? (issue.timetracking.originalEstimateSeconds/3600) : 0 }}
+        {{ issue.timetracking.originalEstimateSeconds ? (issue.timetracking.originalEstimateSeconds / 3600) : 0 }}
       </span>
       <span>
-        {{ issue.timetracking.timeSpentSeconds ? (issue.timetracking.timeSpentSeconds/3600) : 0 }}
+        {{ issue.timetracking.timeSpentSeconds ? (issue.timetracking.timeSpentSeconds / 3600) : 0 }}
       </span>
       <span>
-        {{ issue.timetracking.remainingEstimateSeconds ? (issue.timetracking.remainingEstimateSeconds/3600) : 0 }}
+        {{ issue.timetracking.remainingEstimateSeconds ? (issue.timetracking.remainingEstimateSeconds / 3600) : 0 }}
       </span>
       <span>
         {{ issue.sprint ? issue.sprint.name : '' }}

@@ -9,6 +9,7 @@ import {
     collectSprints,
     collectAssignees,
     filterTree,
+    getPlanningByAssignee
 } from '@/domain/hierarchy'
 
 export const useHierarchyStore = defineStore('hierarchy', () => {
@@ -43,7 +44,11 @@ export const useHierarchyStore = defineStore('hierarchy', () => {
                 collectSprints(hierarchy.value)
                     .map(sprint => [sprint.id, sprint]),
             ).values(),
-        ]
+        ].sort((a, b) =>
+            a.name.localeCompare(b.name, undefined, {
+                numeric: true,
+            }),
+        )
     })
 
     const availableAssignees = computed(() => {
@@ -106,6 +111,21 @@ export const useHierarchyStore = defineStore('hierarchy', () => {
         }
     }
 
+    const planningByAssignee = computed(() => {
+        if (!hierarchy.value) {
+            return []
+        }
+
+        const result = getPlanningByAssignee(
+            hierarchy.value,
+            selectedSprint.value,
+            selectedLabel.value,
+        )
+        console.log('assignee planning', result)
+
+        return result
+    })
+
     return {
         hierarchy,
         rootKey,
@@ -113,6 +133,7 @@ export const useHierarchyStore = defineStore('hierarchy', () => {
         selectedSprint,
         selectedLabel,
         selectedAssignee,
+        planningByAssignee,
 
         availableSprints,
         availableLabels,
