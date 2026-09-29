@@ -83,9 +83,21 @@ export function collectPlanningByAssignee(
   const matchesFilters =
       matchesSprint && matchesLabel
 
-  if (matchesFilters && issue.assignee) {
-    const current = result.get(issue.assignee.accountId) ?? {
-      assignee: issue.assignee,
+  const assignee = issue.assignee ?? {
+    accountId: 'unassigned',
+    displayName: 'Unassigned',
+    active: false,
+    emailAddress: 'unassigned@fvt.com',
+    avatarUrls: {
+      '16x16': '',
+      '24x24': '',
+      '32x32': '',
+      '48x48': '',
+    },
+  }
+  if (matchesFilters) {
+    const current = result.get(assignee.accountId) ?? {
+      assignee: assignee,
       estimatedSeconds: 0,
       issueCount: 0,
     }
@@ -93,7 +105,7 @@ export function collectPlanningByAssignee(
     current.estimatedSeconds += issue.timetracking.remainingEstimateSeconds ?? 0
     current.issueCount += 1
 
-    result.set(issue.assignee.accountId, current)
+    result.set(assignee.accountId, current)
   }
 
   for (const child of issue.children) {

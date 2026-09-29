@@ -15,8 +15,6 @@ function formatHours(seconds: number): string {
 </script>
 
 <template>
-<!--  jalalalala-->
-<!--  <pre>{{ planningByAssignee }}</pre>-->
   <div
       v-if="planningByAssignee"
       class="planning-overview"

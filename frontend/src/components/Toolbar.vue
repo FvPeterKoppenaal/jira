@@ -20,6 +20,8 @@ const {
   rootKey,
   selectedSprint,
   selectedLabel,
+  availableAssignees,
+  selectedAssignee
 } = storeToRefs(store)
 
 const {loadHierarchy} = useHierarchyStore()
@@ -68,6 +70,23 @@ const {loadHierarchy} = useHierarchyStore()
             :value="label"
         >
           {{ label }}
+        </option>
+      </select>
+
+      <select
+          v-model="selectedAssignee"
+          class="toolbar-control"
+      >
+        <option :value="null">
+          All assignees
+        </option>
+
+        <option
+            v-for="assignee in availableAssignees"
+            :key="assignee.accountId"
+            :value="assignee.accountId"
+        >
+          {{ assignee.displayName }}
         </option>
       </select>
 
