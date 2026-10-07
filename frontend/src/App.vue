@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {storeToRefs} from 'pinia'
-import IssueTree from '@/components/IssueTree.vue'
 import PlanningByAssignee from '@/components/PlanningByAssignee.vue'
 import Hierarchy from '@/components/Hierarchy.vue'
 
@@ -104,11 +103,19 @@ const {
   .page-header__logo {
     width: 150px;
   }
+
 }
 
 main {
   margin: 40px auto;
   padding: 0 24px;
+}
+
+@media (max-width: 800px) {
+  main {
+    margin: 24px auto;
+    padding: 0 8px;
+  }
 }
 
 .error {

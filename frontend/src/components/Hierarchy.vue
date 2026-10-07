@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {ref} from 'vue'
 import type {Issue} from "@/types/Issue.ts";
 import IssueTree from "@/components/IssueTree.vue";
 
@@ -13,7 +12,6 @@ withDefaults(
     },
 )
 
-const expanded = ref(true)
 </script>
 
 <template>
@@ -41,6 +39,9 @@ const expanded = ref(true)
 
 <style scoped>
 .tree {
+  --tree-columns: 24px 100px minmax(260px, 1fr) 100px 140px 150px repeat(3, 100px) 150px 150px;
+  --tree-width: 1570px;
+  min-width: 0;
   overflow-x: auto;
   border: 1px solid #2f5527;
   border-radius: 6px;
@@ -48,23 +49,24 @@ const expanded = ref(true)
 
 .header {
   display: grid;
-  grid-template-columns:
-    24px
-    100px
-    minmax(300px, 1fr)
-    130px
-    140px
-    160px
-    180px
-    180px
-180px
-180px
-180px;
+  grid-template-columns: var(--tree-columns);
+  min-width: var(--tree-width);
+  box-sizing: border-box;
 
   gap: 8px;
   padding: 8px;
 
   font-weight: bold;
   border-bottom: 1px solid #2f5527;
+}
+
+@media (max-width: 800px) {
+  .tree {
+    --tree-width: 0px;
+  }
+
+  .header {
+    display: none;
+  }
 }
 </style>

@@ -111,6 +111,10 @@ const {loadHierarchy} = useHierarchyStore()
 }
 
 .toolbar-control {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 190px;
   height: 38px;
 
   padding: 0 12px;
@@ -139,7 +143,7 @@ const {loadHierarchy} = useHierarchyStore()
 }
 
 select.toolbar-control {
-  min-width: 190px;
+  min-width: 0;
 }
 
 .toolbar-button {
@@ -172,15 +176,19 @@ select.toolbar-control {
 
 .search {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
   gap: 8px;
-  margin-bottom: 32px;
-}
-
-.search input {
-  width: 250px;
 }
 
 .search button {
   padding: 8px 16px;
+}
+
+@media (max-width: 800px) {
+  .page-header__toolbar {
+    padding: 12px 16px;
+  }
 }
 </style>

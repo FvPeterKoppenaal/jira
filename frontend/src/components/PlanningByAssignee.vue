@@ -51,7 +51,10 @@ function formatHours(seconds: number): string {
   display: grid;
   gap: 4px;
 
-  min-width: 180px;
+  min-width: min(180px, 100%);
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
   padding: 12px 16px;
 
   border: 2px solid #2f5527;
